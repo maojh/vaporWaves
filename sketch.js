@@ -1,6 +1,7 @@
 
 //Vaporwaves
 //A e s t h e t i c   song visualizer
+//track: NanniniVap by Giorgio Loggia
 
 var song, amplitude;
 var moveY = 0;
@@ -49,28 +50,19 @@ function setup() {
   noStroke();
   textSize(24);
   scale(0.1);
-
+  background(0)
   frameRate(15);
 }
 
 function draw() {
   noStroke();
   push();
-    fill(2,2);
+    fill(127, 255, 212, 2)
     rect(0,0, width, height);
   pop();
 
   if(millis()/1000>60) light = false;
-
-  sfondo(light);
-
-  //display test
-  fill(20, 255);
-  noStroke();
-  rect(85, 10, 100, 40);
-  fill(0,255,0,255);
-  text(int(millis()/1000), 100, 40);
-
+    light = true
 
   // analysis
   //aplitude
@@ -80,7 +72,7 @@ function draw() {
 
   translate(0, height/3.3); // /2.5 horizon
   moveY += map(level, 0, 1, 0, 50);
-  if (moveY >= height) {
+  if (moveY >= height/2) {
     moveY = 0; //partenza
     s = 0;
   }
@@ -90,13 +82,6 @@ function draw() {
 
   //FFT
   var spectrum = fft.analyze();
-  // noStroke();
-  //   fill(0,255,0); // spectrum is green
-  //   for (var i = 0; i< spectrum.length; i++){
-  //     var x = map(i, 0, spectrum.length, 0, width);
-  //     var h = -height + map(spectrum[i], 0, 255, height, 0);
-  //     rect(x, height, width / spectrum.length, h )
-  //   }
 
   if (light) {
     fill(0,0,55, 50);
@@ -105,8 +90,9 @@ function draw() {
     fill(0,0,55, 50);
     stroke(55, 255);
   }
-  //   stroke(levelcolor, random(levelcolor), random(levelcolor)); // waveform is red
   strokeWeight(2);
+  stroke(250, 0, 250)
+    fill(123, 104, 238, 20)
   //sinistra
   beginShape();
   for (var i = 0; i< spectrum.length; i+=passo){
@@ -142,11 +128,10 @@ function draw() {
   vertex(x1+1000, y1);
   endShape();
   pop();
-
 }
 
 function sole(level) {
-  var size = map(level, 0, 1, 50*u, 500*u);
+  var size = map(level, 0, 1, 50*u, 1000*u);
   var levelcolor = map(level, 0, 1, 220, 255);
   fill(levelcolor, levelcolor, 0, 255);
   noStroke();
@@ -158,18 +143,6 @@ function sfondo(light) {
   var val;
   var dens = 10*u;
   var seconds = millis()/1000;
-  // if(seconds < 4) {
-  //   if(trasback>1) {
-  //     trasback-=5;
-  //   }
-  //   // ramp down - intro
-  // }
-  // if( seconds > 110) {
-  //   if(trasback>width/1500) {
-  //     trasback+=5;
-  //   }
-  //   //ramp up - conclusione
-  // }
 push();
   if(light) {
   for (var i = 0; i < height; i+=dens) {
@@ -196,6 +169,7 @@ push();
 }
 pop();
 }
+
 //Utilità
 //
 //Screenshot function
