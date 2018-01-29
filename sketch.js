@@ -16,6 +16,8 @@ var lines = new Array();
 var pictures = new Array();
 var smalls = new Array();
 
+var recording = true;
+
 function preload() {
   song = loadSound('assets/U.mp3');
   //lines
@@ -129,6 +131,9 @@ function draw() {
   endShape();
   pop();
 
+    if(recording) {
+     save(); 
+    }
 }
 
 function sole(level) {
@@ -183,10 +188,11 @@ function mousePressed() {
   if ( song.isPlaying() ) { // .isPlaying() returns a boolean
     song.pause(); // .play() will resume from .pause() position
     text("Pause", 100, 30);
+    reconrding = false;
   } else {
     song.play();
     text("Play", 100, 30);
-    save();
+    reconrding = true;
   }
   pop();
 }
