@@ -53,7 +53,7 @@ function setup() {
   textSize(24);
   scale(0.1);
   background(0)
-  frameRate(3);
+  frameRate(1);
 }
 
 function draw() {
@@ -188,11 +188,11 @@ function mousePressed() {
   if ( song.isPlaying() ) { // .isPlaying() returns a boolean
     song.pause(); // .play() will resume from .pause() position
     text("Pause", 100, 30);
-    reconrding = false;
+    reconrding = true;
   } else {
     song.play();
     text("Play", 100, 30);
-    reconrding = true;
+    reconrding = false;
   }
   pop();
 }
