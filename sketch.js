@@ -51,7 +51,7 @@ function setup() {
   textSize(24);
   scale(0.1);
   background(0)
-  frameRate(15);
+  frameRate(3);
 }
 
 function draw() {
@@ -128,6 +128,7 @@ function draw() {
   vertex(x1+1000, y1);
   endShape();
   pop();
+
 }
 
 function sole(level) {
@@ -185,9 +186,11 @@ function mousePressed() {
   } else {
     song.play();
     text("Play", 100, 30);
+    save();
   }
   pop();
 }
+
 
 //Responsive Canvas
 function windowResized() {
